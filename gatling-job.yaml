@@ -8,7 +8,7 @@ spec:
     spec:
       containers:
       - name: gatling
-        image: your-gatling-image  # Replace with the actual image after building
+        image: image-registry.openshift-image-registry.svc:5000/redwan-alabed91-dev/gatling-demo-v-3-git:latest
         command: ["/opt/gatling/gatling/bin/gatling.sh", "-s", "computerdatabase.BasicSimulation"]
         volumeMounts:
         - name: results
