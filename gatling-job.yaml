@@ -1,0 +1,20 @@
+
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: gatling-test-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: gatling
+        image: your-gatling-image  # Replace with the actual image after building
+        command: ["/opt/gatling/gatling/bin/gatling.sh", "-s", "computerdatabase.BasicSimulation"]
+        volumeMounts:
+        - name: results
+          mountPath: /opt/gatling/gatling/results  # Mount the results directory
+      restartPolicy: Never
+      volumes:
+      - name: results
+        persistentVolumeClaim:  # Use a PVC to store results
+          claimName: gatling-results-pvc
